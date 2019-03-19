@@ -66,13 +66,13 @@ public class CarBroker {
 	/**
 	 * Gets a specified car
 	 *
-	 * @param car Car to retrieve
+	 * @param id id of Car to retrieve
 	 * @return Specified car
 	 */
-	public Car getCar(Car car) {
-		if (car.getId() != null) {
+	public Car getCar(String id) {
+		if (id != null) {
 			for (Car c : cars) {
-				if (c.getId().equals(car.getId())) {
+				if (c.getId().equals(id)) {
 					return c;
 				}
 			}
@@ -84,12 +84,12 @@ public class CarBroker {
 	/**
 	 * Removes a car from the broker based on ID
 	 *
-	 * @param car car to remove from the broker
+	 * @param id id of car to remove from the broker
 	 * @return true if car exists and is removed, else false
 	 */
-	public boolean removeCar(Car car) {
-		if (car.getId() != null) {
-			return cars.removeIf(c -> c.getId().equals(car.getId()));
+	public boolean removeCarById(String id) {
+		if (id != null) {
+			return cars.removeIf(c -> c.getId().equals(id));
 		}
 		return false;
 	}

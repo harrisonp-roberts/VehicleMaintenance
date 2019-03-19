@@ -55,10 +55,10 @@ class CarBrokerTest {
 		vehicleBroker.persist(car1);
 		vehicleBroker.persist(car2);
 
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car2), car2);
-		assertNull(vehicleBroker.getCar(car3));
-
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car2.getId()), car2);
+		assertNull(vehicleBroker.getCar(car3.getId()));
+		
 	}
 
 	@Test
@@ -69,8 +69,8 @@ class CarBrokerTest {
 		car1.setDesc("test");
 
 		assertEquals(vehicleBroker.getAllCars().size(), 2);
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car1).getDesc(), "test");
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car1.getId()).getDesc(), "test");
 
 	}
 
@@ -80,7 +80,7 @@ class CarBrokerTest {
 		car1.setDesc("test");
 		vehicleBroker.persist(car1);
 
-		assertTrue(vehicleBroker.removeCar(car1));
+		assertTrue(vehicleBroker.removeCarById(car1.getId()));
 
 		assertEquals(vehicleBroker.getAllCars().size(), 0);
 	}
@@ -93,11 +93,11 @@ class CarBrokerTest {
 		car1.setDesc("test1");
 		car2.setDesc("test2");
 
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car2), car2);
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car2.getId()), car2);
 
-		assertEquals(vehicleBroker.getCar(car1).getDesc(), "test1");
-		assertEquals(vehicleBroker.getCar(car2).getDesc(), "test2");
+		assertEquals(vehicleBroker.getCar(car1.getId()).getDesc(), "test1");
+		assertEquals(vehicleBroker.getCar(car2.getId()).getDesc(), "test2");
 
 	}
 
@@ -109,11 +109,11 @@ class CarBrokerTest {
 		car1.setDesc("test1");
 		car2.setDesc("test2");
 
-		vehicleBroker.removeCar(car1);
+		vehicleBroker.removeCarById(car1.getId());
 
 		assertEquals(vehicleBroker.getAllCars().size(), 1);
-		assertEquals(vehicleBroker.getCar(car2), car2);
-		assertEquals(vehicleBroker.getCar(car1), null);
+		assertEquals(vehicleBroker.getCar(car2.getId()), car2);
+		assertEquals(vehicleBroker.getCar(car1.getId()), null);
 	}
 
 	@Test
@@ -122,9 +122,9 @@ class CarBrokerTest {
 		vehicleBroker.persist(car2);
 		vehicleBroker.persist(car3);
 
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car2), car2);
-		assertEquals(vehicleBroker.getCar(car3), car3);
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car2.getId()), car2);
+		assertEquals(vehicleBroker.getCar(car3.getId()), car3);
 
 	}
 
@@ -134,11 +134,11 @@ class CarBrokerTest {
 		vehicleBroker.persist(car2);
 		vehicleBroker.persist(car3);
 
-		vehicleBroker.removeCar(car2);
+		vehicleBroker.removeCarById(car2.getId());
 
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car2), null);
-		assertEquals(vehicleBroker.getCar(car3), car3);
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car2.getId()), null);
+		assertEquals(vehicleBroker.getCar(car3.getId()), car3);
 	}
 
 	@Test
@@ -146,9 +146,9 @@ class CarBrokerTest {
 		vehicleBroker.persist(car1);
 		vehicleBroker.persist(car2);
 
-		assertEquals(vehicleBroker.getCar(car1), car1);
-		assertEquals(vehicleBroker.getCar(car2), car2);
-		assertEquals(vehicleBroker.getCar(car3), null);
+		assertEquals(vehicleBroker.getCar(car1.getId()), car1);
+		assertEquals(vehicleBroker.getCar(car2.getId()), car2);
+		assertEquals(vehicleBroker.getCar(car3.getId()), null);
 	}
 
 	@Test
@@ -185,7 +185,7 @@ class CarBrokerTest {
 		vehicleBroker.persist(car2);
 		vehicleBroker.persist(car3);
 
-		vehicleBroker.removeCar(car3);
+		vehicleBroker.removeCarById(car3.getId());
 
 		ArrayList<Car> cars = vehicleBroker.getAllCars();
 
@@ -205,7 +205,7 @@ class CarBrokerTest {
 		car2.setDesc("test");
 		vehicleBroker.persist(car2);
 
-		vehicleBroker.removeCar(car2);
+		vehicleBroker.removeCarById(car2.getId());
 
 		ArrayList<Car> cars = vehicleBroker.getAllCars();
 
