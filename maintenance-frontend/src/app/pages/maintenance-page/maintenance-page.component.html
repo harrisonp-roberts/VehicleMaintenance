@@ -1,0 +1,146 @@
+<div id="flex-container">
+  <div class="col-30">
+    <h1>Cars</h1>
+    <div class="car-container">
+      <ul>
+        <li *ngFor="let car of allCars" (click)="viewMaintenance(car)" class="cars">
+          <div class="make car-list">Make: {{car.make}}</div>
+          <div class="model car-list">Model: {{car.model}}</div>
+          <div class="name car-list">Name: {{car.name}}</div>
+        </li>
+      </ul>
+    </div>
+    <button class="btn" (click)="addCar()">Add Car</button>
+  </div>
+  <div class="col-70">
+    <div class="addCar" *ngIf="showAddCar">
+      <h1>Add Car</h1>
+      <form [formGroup]="addCarForm" (ngSubmit)="onSave()">
+        <table class="form-table">
+          <tr>
+            <td>
+              Make:
+              <br>
+              <input formControlName="make" type="text" name="makeIn" required>
+            </td>
+            <td>Model:
+              <br>
+              <input formControlName="model" type="text" name="modelIn" required></td>
+          </tr>
+          <tr>
+            <td>
+              Name:
+              <br>
+              <input formControlName="name" type="text" name="nameIn" required>
+            </td>
+            <td>
+              Description:
+              <br>
+              <input formControlName="description" type="text" name="descIn" required>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Year:
+              <br>
+              <input formControlName="year" type="number" min="1900" max="2020" step="1" value="2018" required>
+            </td>
+            <td>
+              Odometer (km):
+              <br>
+              <input formControlName="odometer" type="number" min="0" step="1" value="0" required>
+            </td>
+          </tr>
+          <tr>
+            <td>
+              Type:
+              <br>
+              Gasoline <input formControlName="type" type="radio" name="type" value="gas">
+              Electric <input formControlName="type" type="radio" name="type" value="electric">
+              Diesel <input formControlName="type" type="radio" name="type" value="diesel">
+            </td>
+          </tr>
+        </table>
+        <button class="btn btn-block">Add Car</button>
+      </form>
+    </div>
+
+    <div class="viewCar" *ngIf="showMaintenance">
+      <div class="details" *ngIf="selectedCar">
+        <h1>{{ selectedCar.name }} Details</h1>
+        <table class="details-table">
+          <tr>
+            <td>Name:</td>
+            <td>{{ selectedCar.name }}</td>
+          </tr>
+          <tr>
+            <td>Make:</td>
+            <td>{{selectedCar.make}}</td>
+          </tr>
+          <tr>
+            <td>Model:</td>
+            <td>{{ selectedCar.model }}</td>
+          </tr>
+          <tr>
+            <td>Year:</td>
+            <td>{{ selectedCar.year }}</td>
+          </tr>
+          <tr>
+            <td>Description:</td>
+            <td>{{selectedCar.desc}}</td>
+          </tr>
+          <tr>
+            <td>Odometer:</td>
+            <td>{{selectedCar.odometer}}</td>
+          </tr>
+          <tr>
+            <td>Type:</td>
+            <td>
+              <span *ngIf="selectedCar.type=='electric'">Electric</span>
+              <span *ngIf="selectedCar.type=='gascar'">Gas</span>
+              <span *ngIf="selectedCar.type=='dieselcar'">Diesel</span>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="maintenance">
+        <h2>{{selectedCar.name}} Maintenance History</h2>
+        <ul>
+          <li *ngFor="let maint of selectedCar.maintenanceHistory">
+            <span *ngIf="maint.type=='tirerotation'">Tire Rotation</span>
+            <span *ngIf="maint.type=='replacefilter'">Replace Air Filter</span>
+            <span *ngIf="maint.type=='oilchange'">Oil Change</span>
+            , {{maint.date}}
+          </li>
+        </ul>
+      </div>
+
+      <div class="add-maintenance">
+        <h2>Add Maintenance to {{selectedCar.name}}</h2>
+        <form [formGroup]="addMaintenanceForm" class="margin-2">
+          <h3>Maintenance Type:</h3>
+          <div class="maintenance-form">
+            <div class="maintenance-form-radio">Tire Rotation <input formControlName="maintenanceType" type="radio"
+                                                                     name="maintenanceType"
+                                                                     value="tirerotation" required></div>
+            <div class="maintenance-form-radio">Replace Air Filter <input formControlName="maintenanceType" type="radio"
+                                                                          name="maintenanceType"
+                                                                          value="replacefilter" required></div>
+            <div class="maintenance-form-radio" *ngIf="selectedCar.type!='electric'">Oil Change <input
+              formControlName="maintenanceType" type="radio"
+              name="maintenanceType"
+              value="oilchange" required></div>
+
+          </div>
+          <br>
+          <h3>Maintenance Date:</h3>
+          <div class="maint-date">
+            <input type="date" formControlName="maintenanceDate" name="maintenanceDate" required>
+          </div>
+          <button (click)="addMaintenance(selectedCar)">Add Maintenance</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MaintenanceTrackerLibrary:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/MaintenanceTrackerLibrary_jar</output-path>
+    <root id="archive" name="MaintenanceTrackerLibrary.jar">
+      <element id="module-output" name="MaintenanceTrackerLibrary" />
+    </root>
+  </artifact>
+</component>
